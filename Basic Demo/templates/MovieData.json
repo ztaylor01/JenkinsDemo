@@ -1,0 +1,56 @@
+{
+"records" :[{
+    "attributes" : {"type" : "Movie", "referenceId" : "ref1"},
+    "Name" : "Movie1",
+    "Release_Date__c" : "2022-01-01",
+    "Studio__c" : "Universal",
+    "Runtime__c" : "2 hours 37 minutes",
+    "Director__c" : "Jon Smith",
+    "Rating__c" : "PG",
+    "Trailers" : {
+      "records" :[{
+         "attributes" : {"type" : "Trailer", "referenceId" : "ref2"},
+         "Name" : "Movie1Trailer1",
+         "Release_Event__c" : "Super Bowl",
+         "Spoilers_Shown__c" : "true",
+         "Movie__c" : "ref1",
+          "Regions" : {
+            "records" : [{
+              "attributes" : {"type" : "Region", "referenceId" : "ref3"},
+              "Name" : "China"},
+              {"attributes" : {"type" : "Region", "referenceId" : "ref4"},
+              "Name" : "USA"
+              }]
+          }},{
+         "attributes" : {"type" : "Trailer", "referenceId" : "ref5"},
+         "Name" : "Movie1Trailer2",
+         "Release_Event__c" : "Memorial Day Weekend",
+         "Spoilers_Shown__c" : "false",
+         "Movie__c" : "ref1"
+         }]
+      }
+    },{
+    "attributes" : {"type" : "Movie", "referenceId" : "ref6"},
+    "Name" : "Movie2",
+    "Release_Date__c" : "2021-06-01",
+    "Studio__c" : "Paramount",
+    "Runtime__c" : "1 hours 45 minutes",
+    "Director__c" : "Jane Doe",
+    "Rating__c" : "R",
+    "Trailers" : {
+      "records" :[{
+        "attributes" : {"type" : "Trailer", "referenceId" : "ref7"},
+        "Name" : "Movie2Trailer1",
+        "Release_Event__c" : "Thanksgiving",
+        "Spoilers_Shown__c" : "false",
+        "Movie__c" : "ref2",
+        "Regions" : {
+          "records" : [{
+            "attributes" : {"type" : "Region", "referenceId" : "ref3"},
+            "Name" : "Europe"
+            }]
+        }
+        }]
+      }
+  }]
+}

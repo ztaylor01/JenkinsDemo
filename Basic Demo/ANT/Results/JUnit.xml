@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Basic Demo/tests" tests="1" failures="0" skipped="0" hostname="Zacs-MBP" time="13.066" timestamp="Thu Dec 09 08:44:38 CST 2021">
+	<properties>
+		<property name="excludeCallableTestCases" value="true"/>
+		<property name="testEnvironment" value=""/>
+		<property name="pluginOutputLevel" value="WARNING"/>
+		<property name="projectPath" value=".."/>
+		<property name="salesforceMetadataCache" value="Reuse"/>
+		<property name="resultsPathDisposition" value="Replace"/>
+		<property name="testOutputLevel" value="INFO"/>
+		<property name="webBrowserType" value="Chrome"/>
+		<property name="resultsPath" value="../ANT/Results"/>
+		<property name="webBrowserConfiguration" value="Full Screen"/>
+		<property name="projectCachePath" value="/Users/zac.taylor/Provar/DemoProj/Basic Demo/ANT/../.provarCaches"/>
+	</properties>
+	<testcase classname="tests/In Progress/ShadowDom.testcase" name="ShadowDom.testcase" time="7.876">
+	</testcase>
+</testsuite>

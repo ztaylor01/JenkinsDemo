@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testCase id="8">
+  <summary/>
+  <steps>
+    <apiCall apiId="com.provar.plugins.forcedotcom.core.testapis.ApexConnect" name="ApexConnect" testItemId="4" title="Salesforce Connect: Admin (Test)">
+      <tags/>
+      <arguments>
+        <argument id="connectionName">
+          <value class="value" valueClass="string">PersonalDevOrg</value>
+        </argument>
+        <argument id="resultName">
+          <value class="value" valueClass="string">Admin</value>
+        </argument>
+        <argument id="resultScope">
+          <value class="value" valueClass="string">Test</value>
+        </argument>
+        <argument id="reuseConnectionName"/>
+        <argument id="alreadyOpenBehaviour">
+          <value class="value" valueClass="string">Fail</value>
+        </argument>
+        <argument id="uiApplicationName">
+          <value class="value" valueClass="string">Sales</value>
+        </argument>
+        <argument id="closeAllPrimaryTabs">
+          <value class="value" valueClass="boolean">true</value>
+        </argument>
+        <argument id="quickUiLogin">
+          <value class="value" valueClass="boolean">true</value>
+        </argument>
+        <argument id="privateBrowsingMode"/>
+        <argument id="enableObjectIdLogging">
+          <value class="value" valueClass="boolean">true</value>
+        </argument>
+        <argument id="autoCleanup">
+          <value class="value" valueClass="boolean">true</value>
+        </argument>
+        <argument id="cleanupConnectionName"/>
+        <argument id="logFileLocation"/>
+        <argument id="username"/>
+        <argument id="password"/>
+        <argument id="securityToken"/>
+        <argument id="environment"/>
+        <argument id="lightningMode">
+          <value class="value" valueClass="string">default</value>
+        </argument>
+        <argument id="webBrowser"/>
+      </arguments>
+    </apiCall>
+    <apiCall apiId="com.provar.plugins.bundled.apis.control.StepGroup" name="StepGroup" testItemId="2" title="Read JSON Data">
+      <arguments>
+        <argument id="description">
+          <value class="value" valueClass="string">Read JSON Data</value>
+        </argument>
+      </arguments>
+      <parameterValueSources>
+        <parameterValueSource url="json:fileScheme=json%3A&amp;whereComparison=EqualTo&amp;filePathValue=PrimitiveValueImpl+%5B+value%3A+templates%2FtestFile.json%2C+valueId%3Dnull%2C+createdUpdateSeq%3D-1%2C+updatedUpdateSeq%3D-1%5D&amp;filePath=templates%2FtestFile.json&amp;expressionOffset=-1&amp;expressionLength=-1&amp;propertyChangeSupport=java.beans.PropertyChangeSupport%406f2cef5c" variableName="JSONData" variableScope="Test">
+          <sourceValue class="jsonTarget" whereComparison="EqualTo">
+            <filePath class="value" valueClass="string">templates/testFile.json</filePath>
+          </sourceValue>
+        </parameterValueSource>
+      </parameterValueSources>
+      <clauses>
+        <clause name="hidden" testItemId="3">
+          <steps/>
+        </clause>
+      </clauses>
+    </apiCall>
+    <apiCall apiId="com.provar.plugins.bundled.apis.control.ForEach" name="ForEach" testItemId="15" title="For Each: {JSONData.records}=&gt;ParentAccountRows">
+      <arguments>
+        <argument id="list">
+          <value class="variable">
+            <path element="JSONData"/>
+            <path element="records"/>
+          </value>
+        </argument>
+        <argument id="fromItem">
+          <value class="value" valueClass="decimal">1</value>
+        </argument>
+        <argument id="valueName">
+          <value class="value" valueClass="string">ParentAccountRows</value>
+        </argument>
+        <argument id="continueOnFailure"/>
+      </arguments>
+      <clauses>
+        <clause name="substeps" testItemId="16">
+          <steps>
+            <apiCall apiId="com.provar.plugins.forcedotcom.core.testapis.ApexCreateObject" name="ApexCreateObject" parameterGeneratorUri="command:com.provar.plugins.forcedotcom.ui.commands.CreateCustomObjectTestStepCommand" testItemId="5" title="Create Object: Account=&gt;ParentAccountId">
+              <arguments>
+                <argument id="objectType">
+                  <value class="value" valueClass="string">Account</value>
+                </argument>
+                <argument id="resultIdName">
+                  <value class="value" valueClass="string">ParentAccountId</value>
+                </argument>
+                <argument id="apexConnectionName">
+                  <value class="value" valueClass="string">Admin</value>
+                </argument>
+                <argument id="assignmentRuleId"/>
+                <argument id="resultScope">
+                  <value class="value" valueClass="string">Test</value>
+                </argument>
+                <argument id="Name">
+                  <value class="variable">
+                    <path element="ParentAccountRows"/>
+                    <path element="name"/>
+                  </value>
+                </argument>
+                <argument id="Phone">
+                  <value class="variable">
+                    <path element="ParentAccountRows"/>
+                    <path element="phone"/>
+                  </value>
+                </argument>
+                <argument id="Website">
+                  <value class="variable">
+                    <path element="ParentAccountRows"/>
+                    <path element="website"/>
+                  </value>
+                </argument>
+                <argument id="NumberOfEmployees">
+                  <value class="variable">
+                    <path element="ParentAccountRows"/>
+                    <path element="numberOfEmployees"/>
+                  </value>
+                </argument>
+                <argument id="Industry">
+                  <value class="variable">
+                    <path element="ParentAccountRows"/>
+                    <path element="industry"/>
+                  </value>
+                </argument>
+              </arguments>
+              <parameterGeneratorProperties>
+                <propertyValue name="com.provar.plugins.forcedotcom.ui.commands.CreateCustomObjectTestStepCommand.ConnectionName">PersonalDevOrg</propertyValue>
+                <propertyValue name="com.provar.plugins.forcedotcom.ui.commands.CreateCustomObjectTestStepCommand.CustomObjectName">Account</propertyValue>
+              </parameterGeneratorProperties>
+              <generatedParameters>
+                <apiParam group="fields" modelBinding="sf:ui:binding:object?object=Account&amp;field=Name" name="Name" title="Name"/>
+                <apiParam group="fields" modelBinding="sf:ui:binding:object?object=Account&amp;field=Phone" name="Phone" title="Phone"/>
+                <apiParam group="fields" modelBinding="sf:ui:binding:object?object=Account&amp;field=Website" name="Website" title="Website"/>
+                <apiParam group="fields" modelBinding="sf:ui:binding:object?object=Account&amp;field=NumberOfEmployees" name="NumberOfEmployees" title="NumberOfEmployees"/>
+                <apiParam group="fields" modelBinding="sf:ui:binding:object?object=Account&amp;field=Industry" name="Industry" title="Industry"/>
+              </generatedParameters>
+            </apiCall>
+            <apiCall apiId="com.provar.plugins.bundled.apis.control.ForEach" name="ForEach" testItemId="22" title="For Each: {ParentAccountRows.Contacts.records}=&gt;ContactRows">
+              <arguments>
+                <argument id="list">
+                  <value class="variable">
+                    <path element="ParentAccountRows"/>
+                    <path element="Contacts"/>
+                    <path element="records"/>
+                  </value>
+                </argument>
+                <argument id="fromItem">
+                  <value class="value" valueClass="decimal">1</value>
+                </argument>
+                <argument id="valueName">
+                  <value class="value" valueClass="string">ContactRows</value>
+                </argument>
+                <argument id="continueOnFailure"/>
+              </arguments>
+              <clauses>
+                <clause name="substeps" testItemId="23">
+                  <steps>
+                    <apiCall apiId="com.provar.plugins.forcedotcom.core.testapis.ApexCreateObject" name="ApexCreateObject" parameterGeneratorUri="command:com.provar.plugins.forcedotcom.ui.commands.CreateCustomObjectTestStepCommand" testItemId="21" title="Create Object: Contact=&gt;ContactId">
+                      <arguments>
+                        <argument id="objectType">
+                          <value class="value" valueClass="string">Contact</value>
+                        </argument>
+                        <argument id="resultIdName">
+                          <value class="value" valueClass="string">ContactId</value>
+                        </argument>
+                        <argument id="apexConnectionName">
+                          <value class="value" valueClass="string">Admin</value>
+                        </argument>
+                        <argument id="assignmentRuleId"/>
+                        <argument id="resultScope">
+                          <value class="value" valueClass="string">Test</value>
+                        </argument>
+                        <argument id="LastName">
+                          <value class="variable">
+                            <path element="ContactRows"/>
+                            <path element="lastname"/>
+                          </value>
+                        </argument>
+                        <argument id="Title">
+                          <value class="variable">
+                            <path element="ContactRows"/>
+                            <path element="title"/>
+                          </value>
+                        </argument>
+                        <argument id="Email">
+                          <value class="variable">
+                            <path element="ContactRows"/>
+                            <path element="email"/>
+                          </value>
+                        </argument>
+                        <argument id="AccountId">
+                          <value class="variable">
+                            <path element="ParentAccountId"/>
+                          </value>
+                        </argument>
+                      </arguments>
+                      <parameterGeneratorProperties>
+                        <propertyValue name="com.provar.plugins.forcedotcom.ui.commands.CreateCustomObjectTestStepCommand.ConnectionName">PersonalDevOrg</propertyValue>
+                        <propertyValue name="com.provar.plugins.forcedotcom.ui.commands.CreateCustomObjectTestStepCommand.CustomObjectName">Contact</propertyValue>
+                      </parameterGeneratorProperties>
+                      <generatedParameters>
+                        <apiParam group="fields" modelBinding="sf:ui:binding:object?object=Contact&amp;field=LastName" name="LastName" title="LastName"/>
+                        <apiParam group="fields" modelBinding="sf:ui:binding:object?object=Contact&amp;field=Title" name="Title" title="Title"/>
+                        <apiParam group="fields" modelBinding="sf:ui:binding:object?object=Contact&amp;field=Email" name="Email" title="Email"/>
+                        <apiParam group="fields" modelBinding="sf:ui:binding:object?object=Contact&amp;field=AccountId" name="AccountId" title="AccountId"/>
+                      </generatedParameters>
+                    </apiCall>
+                  </steps>
+                </clause>
+              </clauses>
+            </apiCall>
+            <apiCall apiId="com.provar.plugins.bundled.apis.control.ForEach" name="ForEach" testItemId="25" title="For Each: {ParentAccountRows.childAccounts.records}=&gt;ChildAccountRows">
+              <arguments>
+                <argument id="list">
+                  <value class="variable">
+                    <path element="ParentAccountRows"/>
+                    <path element="childAccounts"/>
+                    <path element="records"/>
+                  </value>
+                </argument>
+                <argument id="fromItem">
+                  <value class="value" valueClass="decimal">1</value>
+                </argument>
+                <argument id="valueName">
+                  <value class="value" valueClass="string">ChildAccountRows</value>
+                </argument>
+                <argument id="continueOnFailure"/>
+              </arguments>
+              <clauses>
+                <clause name="substeps" testItemId="26">
+                  <steps>
+                    <apiCall apiId="com.provar.plugins.forcedotcom.core.testapis.ApexCreateObject" name="ApexCreateObject" parameterGeneratorUri="command:com.provar.plugins.forcedotcom.ui.commands.CreateCustomObjectTestStepCommand" testItemId="29" title="Create Object: Account=&gt;ChildAccountId">
+                      <arguments>
+                        <argument id="objectType">
+                          <value class="value" valueClass="string">Account</value>
+                        </argument>
+                        <argument id="resultIdName">
+                          <value class="value" valueClass="string">ChildAccountId</value>
+                        </argument>
+                        <argument id="apexConnectionName">
+                          <value class="value" valueClass="string">Admin</value>
+                        </argument>
+                        <argument id="assignmentRuleId"/>
+                        <argument id="resultScope">
+                          <value class="value" valueClass="string">Test</value>
+                        </argument>
+                        <argument id="Name">
+                          <value class="variable">
+                            <path element="ChildAccountRows"/>
+                            <path element="name"/>
+                          </value>
+                        </argument>
+                        <argument id="Phone">
+                          <value class="variable">
+                            <path element="ChildAccountRows"/>
+                            <path element="phone"/>
+                          </value>
+                        </argument>
+                        <argument id="Website">
+                          <value class="variable">
+                            <path element="ChildAccountRows"/>
+                            <path element="website"/>
+                          </value>
+                        </argument>
+                        <argument id="NumberOfEmployees">
+                          <value class="variable">
+                            <path element="ChildAccountRows"/>
+                            <path element="numberOfEmployees"/>
+                          </value>
+                        </argument>
+                        <argument id="Industry">
+                          <value class="variable">
+                            <path element="ChildAccountRows"/>
+                            <path element="Industry"/>
+                          </value>
+                        </argument>
+                        <argument id="ParentId">
+                          <value class="variable">
+                            <path element="ParentAccountId"/>
+                          </value>
+                        </argument>
+                      </arguments>
+                      <parameterGeneratorProperties>
+                        <propertyValue name="com.provar.plugins.forcedotcom.ui.commands.CreateCustomObjectTestStepCommand.ConnectionName">PersonalDevOrg</propertyValue>
+                        <propertyValue name="com.provar.plugins.forcedotcom.ui.commands.CreateCustomObjectTestStepCommand.CustomObjectName">Account</propertyValue>
+                      </parameterGeneratorProperties>
+                      <generatedParameters>
+                        <apiParam group="fields" modelBinding="sf:ui:binding:object?object=Account&amp;field=Name" name="Name" title="Name"/>
+                        <apiParam group="fields" modelBinding="sf:ui:binding:object?object=Account&amp;field=Phone" name="Phone" title="Phone"/>
+                        <apiParam group="fields" modelBinding="sf:ui:binding:object?object=Account&amp;field=Website" name="Website" title="Website"/>
+                        <apiParam group="fields" modelBinding="sf:ui:binding:object?object=Account&amp;field=NumberOfEmployees" name="NumberOfEmployees" title="NumberOfEmployees"/>
+                        <apiParam group="fields" modelBinding="sf:ui:binding:object?object=Account&amp;field=Industry" name="Industry" title="Industry"/>
+                        <apiParam group="fields" modelBinding="sf:ui:binding:object?object=Account&amp;field=ParentId" name="ParentId" title="ParentId"/>
+                      </generatedParameters>
+                    </apiCall>
+                  </steps>
+                </clause>
+              </clauses>
+            </apiCall>
+          </steps>
+        </clause>
+      </clauses>
+    </apiCall>
+  </steps>
+</testCase>

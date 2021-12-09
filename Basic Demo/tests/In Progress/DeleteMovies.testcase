@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testCase>
+  <summary/>
+  <steps>
+    <apiCall apiId="com.provar.plugins.forcedotcom.core.testapis.ApexConnect" name="ApexConnect" testItemId="1" title="Salesforce Connect: PersonalDevOrg (Test)">
+      <arguments>
+        <argument id="connectionName">
+          <value class="value" valueClass="string">PersonalDevOrg</value>
+        </argument>
+        <argument id="resultName">
+          <value class="value" valueClass="string">PersonalDevOrg</value>
+        </argument>
+        <argument id="resultScope">
+          <value class="value" valueClass="string">Test</value>
+        </argument>
+        <argument id="uiApplicationName">
+          <value class="value" valueClass="string">Disney_App</value>
+        </argument>
+        <argument id="quickUiLogin">
+          <value class="value" valueClass="boolean">true</value>
+        </argument>
+        <argument id="closeAllPrimaryTabs">
+          <value class="value" valueClass="boolean">true</value>
+        </argument>
+        <argument id="reuseConnectionName"/>
+        <argument id="alreadyOpenBehaviour">
+          <value class="value" valueClass="string">Fail</value>
+        </argument>
+        <argument id="privateBrowsingMode"/>
+        <argument id="enableObjectIdLogging">
+          <value class="value" valueClass="boolean">true</value>
+        </argument>
+        <argument id="autoCleanup"/>
+        <argument id="cleanupConnectionName"/>
+        <argument id="logFileLocation"/>
+        <argument id="username"/>
+        <argument id="password"/>
+        <argument id="securityToken"/>
+        <argument id="environment"/>
+        <argument id="lightningMode">
+          <value class="value" valueClass="string">default</value>
+        </argument>
+        <argument id="webBrowser"/>
+      </arguments>
+    </apiCall>
+    <apiCall apiId="com.provar.plugins.bundled.apis.control.Finally" name="Finally" testItemId="76" title="Finally: Purge Data">
+      <tags/>
+      <arguments>
+        <argument id="description">
+          <value class="value" valueClass="string">Purge Data</value>
+        </argument>
+      </arguments>
+      <clauses>
+        <clause name="hidden" testItemId="49">
+          <steps>
+            <apiCall apiId="com.provar.plugins.bundled.apis.control.StepGroup" name="StepGroup" testItemId="55" title="Movie">
+              <arguments>
+                <argument id="description">
+                  <value class="value" valueClass="string">Movie</value>
+                </argument>
+              </arguments>
+              <clauses>
+                <clause name="hidden" testItemId="56">
+                  <steps>
+                    <apiCall apiId="com.provar.plugins.forcedotcom.core.testapis.ApexSoqlQuery" name="ApexSoqlQuery" testItemId="18" title="SOQL Query: select Id from Movie__c\nWHERE CreatedDate &gt;= {TODAY}T00:00:00Z\nAND CreatedById = '0055e0000013AzSAAU'=&gt;MovieRows">
+                      <arguments>
+                        <argument id="soqlQuery">
+                          <value class="compound">
+                            <parts>
+                              <value valueClass="string">select Id from Movie__c\nWHERE CreatedDate &gt;= </value>
+                              <variable>
+                                <path element="TODAY"/>
+                              </variable>
+                              <value valueClass="string">T00:00:00Z\nAND CreatedById = '0055e0000013AzSAAU'</value>
+                            </parts>
+                          </value>
+                        </argument>
+                        <argument id="apexConnectionName">
+                          <value class="value" valueClass="string">PersonalDevOrg</value>
+                        </argument>
+                        <argument id="resultListName">
+                          <value class="value" valueClass="string">MovieRows</value>
+                        </argument>
+                        <argument id="resultScope">
+                          <value class="value" valueClass="string">Test</value>
+                        </argument>
+                      </arguments>
+                    </apiCall>
+                    <apiCall apiId="com.provar.plugins.bundled.apis.control.ForEach" name="ForEach" testItemId="52" title="For Each: {MovieRows}=&gt;Row">
+                      <arguments>
+                        <argument id="list">
+                          <value class="variable">
+                            <path element="MovieRows"/>
+                          </value>
+                        </argument>
+                        <argument id="fromItem">
+                          <value class="value" valueClass="decimal">1</value>
+                        </argument>
+                        <argument id="valueName">
+                          <value class="value" valueClass="string">Row</value>
+                        </argument>
+                        <argument id="continueOnFailure"/>
+                      </arguments>
+                      <clauses>
+                        <clause name="substeps" testItemId="53">
+                          <steps>
+                            <apiCall apiId="com.provar.plugins.forcedotcom.core.testapis.ApexDeleteObject" name="ApexDeleteObject" testItemId="75" title="Delete Object: {Row.Id}">
+                              <arguments>
+                                <argument id="apexConnectionName">
+                                  <value class="value" valueClass="string">PersonalDevOrg</value>
+                                </argument>
+                                <argument id="objectId">
+                                  <value class="variable">
+                                    <path element="Row"/>
+                                    <path element="Id"/>
+                                  </value>
+                                </argument>
+                              </arguments>
+                            </apiCall>
+                          </steps>
+                        </clause>
+                      </clauses>
+                    </apiCall>
+                  </steps>
+                </clause>
+              </clauses>
+            </apiCall>
+            <apiCall apiId="com.provar.plugins.bundled.apis.control.StepGroup" name="StepGroup" testItemId="63" title="Trailer">
+              <arguments>
+                <argument id="description">
+                  <value class="value" valueClass="string">Trailer</value>
+                </argument>
+              </arguments>
+              <clauses>
+                <clause name="hidden" testItemId="64">
+                  <steps>
+                    <apiCall apiId="com.provar.plugins.forcedotcom.core.testapis.ApexSoqlQuery" name="ApexSoqlQuery" testItemId="20" title="SOQL Query: select Id from Trailer__c\nWHERE CreatedDate &gt;= {TODAY}T00:00:00Z\nAND CreatedById = '0055e0000013AzSAAU'=&gt;TrailerRows">
+                      <arguments>
+                        <argument id="soqlQuery">
+                          <value class="compound">
+                            <parts>
+                              <value valueClass="string">select Id from Trailer__c\nWHERE CreatedDate &gt;= </value>
+                              <variable>
+                                <path element="TODAY"/>
+                              </variable>
+                              <value valueClass="string">T00:00:00Z\nAND CreatedById = '0055e0000013AzSAAU'</value>
+                            </parts>
+                          </value>
+                        </argument>
+                        <argument id="apexConnectionName">
+                          <value class="value" valueClass="string">PersonalDevOrg</value>
+                        </argument>
+                        <argument id="resultListName">
+                          <value class="value" valueClass="string">TrailerRows</value>
+                        </argument>
+                        <argument id="resultScope">
+                          <value class="value" valueClass="string">Test</value>
+                        </argument>
+                      </arguments>
+                    </apiCall>
+                    <apiCall apiId="com.provar.plugins.bundled.apis.control.ForEach" name="ForEach" testItemId="72" title="For Each: {TrailerRows}=&gt;Row">
+                      <arguments>
+                        <argument id="list">
+                          <value class="variable">
+                            <path element="TrailerRows"/>
+                          </value>
+                        </argument>
+                        <argument id="fromItem">
+                          <value class="value" valueClass="decimal">1</value>
+                        </argument>
+                        <argument id="valueName">
+                          <value class="value" valueClass="string">Row</value>
+                        </argument>
+                        <argument id="continueOnFailure"/>
+                      </arguments>
+                      <clauses>
+                        <clause name="substeps" testItemId="73">
+                          <steps>
+                            <apiCall apiId="com.provar.plugins.forcedotcom.core.testapis.ApexDeleteObject" name="ApexDeleteObject" testItemId="74" title="Delete Object: {Row.Id}">
+                              <arguments>
+                                <argument id="apexConnectionName">
+                                  <value class="value" valueClass="string">PersonalDevOrg</value>
+                                </argument>
+                                <argument id="objectId">
+                                  <value class="variable">
+                                    <path element="Row"/>
+                                    <path element="Id"/>
+                                  </value>
+                                </argument>
+                              </arguments>
+                            </apiCall>
+                          </steps>
+                        </clause>
+                      </clauses>
+                    </apiCall>
+                  </steps>
+                </clause>
+              </clauses>
+            </apiCall>
+            <apiCall apiId="com.provar.plugins.bundled.apis.control.StepGroup" name="StepGroup" testItemId="21" title="Region">
+              <arguments>
+                <argument id="description">
+                  <value class="value" valueClass="string">Region</value>
+                </argument>
+              </arguments>
+              <clauses>
+                <clause name="hidden" testItemId="22">
+                  <steps>
+                    <apiCall apiId="com.provar.plugins.forcedotcom.core.testapis.ApexSoqlQuery" name="ApexSoqlQuery" testItemId="23" title="SOQL Query: select Id from Region__c\nWHERE CreatedDate &gt;= {TODAY}T00:00:00Z\nAND CreatedById = '0055e0000013AzSAAU'=&gt;RegionRows">
+                      <arguments>
+                        <argument id="soqlQuery">
+                          <value class="compound">
+                            <parts>
+                              <value valueClass="string">select Id from Region__c\nWHERE CreatedDate &gt;= </value>
+                              <variable>
+                                <path element="TODAY"/>
+                              </variable>
+                              <value valueClass="string">T00:00:00Z\nAND CreatedById = '0055e0000013AzSAAU'</value>
+                            </parts>
+                          </value>
+                        </argument>
+                        <argument id="apexConnectionName">
+                          <value class="value" valueClass="string">PersonalDevOrg</value>
+                        </argument>
+                        <argument id="resultListName">
+                          <value class="value" valueClass="string">RegionRows</value>
+                        </argument>
+                        <argument id="resultScope">
+                          <value class="value" valueClass="string">Test</value>
+                        </argument>
+                      </arguments>
+                    </apiCall>
+                    <apiCall apiId="com.provar.plugins.bundled.apis.control.ForEach" name="ForEach" testItemId="24" title="For Each: {RegionRows}=&gt;Row">
+                      <arguments>
+                        <argument id="list">
+                          <value class="variable">
+                            <path element="RegionRows"/>
+                          </value>
+                        </argument>
+                        <argument id="fromItem">
+                          <value class="value" valueClass="decimal">1</value>
+                        </argument>
+                        <argument id="valueName">
+                          <value class="value" valueClass="string">Row</value>
+                        </argument>
+                        <argument id="continueOnFailure"/>
+                      </arguments>
+                      <clauses>
+                        <clause name="substeps" testItemId="25">
+                          <steps>
+                            <apiCall apiId="com.provar.plugins.forcedotcom.core.testapis.ApexDeleteObject" name="ApexDeleteObject" testItemId="26" title="Delete Object: {Row.Id}">
+                              <arguments>
+                                <argument id="apexConnectionName">
+                                  <value class="value" valueClass="string">PersonalDevOrg</value>
+                                </argument>
+                                <argument id="objectId">
+                                  <value class="variable">
+                                    <path element="Row"/>
+                                    <path element="Id"/>
+                                  </value>
+                                </argument>
+                              </arguments>
+                            </apiCall>
+                          </steps>
+                        </clause>
+                      </clauses>
+                    </apiCall>
+                  </steps>
+                </clause>
+              </clauses>
+            </apiCall>
+          </steps>
+        </clause>
+      </clauses>
+    </apiCall>
+  </steps>
+</testCase>
